@@ -1,9 +1,10 @@
 {
     "name": "alooze/qwertcms-lang",
     "type": "library",
-    "description": "",
+    "description": "Database-store language module for QWERT CMS",
     "keywords": [
         "alooze",
+        "qwertcms",
         "qwertcms-lang"
     ],
     "homepage": "https://github.com/alooze/",
