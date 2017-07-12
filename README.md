@@ -1,4 +1,4 @@
-# 
+# QWERTCMS-LANG
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -7,56 +7,43 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Note:** Replace ```alooze``` ```alooze``` ```https://github.com/alooze``` ```a.looze@gmail.com``` ```alooze``` `````` `````` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line. You can run `$ php prefill.php` in the command line to make all replacements at once. Delete the file prefill.php as well.
+Данная библиотека является модулем для alooze/qwertcms-base. Ее предназначение - дать возможность хранить языковые строки в БД и управлять этими строками через админку. 
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+Обычный способ использования языковых строк при этом не изменяется. 
 
-## Structure
+## Архитектура
 
-If any of the following are applicable to your project, then the directory structure should follow industry best practises by being named the following.
+1) миграция lang_data
+2) модель LangData
+3) trait alooze/QwertCms/Translatable/Translatable
+4) функции хелперы в файле Helpers/translate.php
+5) роуты для управления языковыми строками в админке routes/qwertcms-lang.php (нужен include в роуты)
+6) контроллер для админки LangController
+7) шаблоны из views/langs/
+8) настройка в админке 
+        'НАСТРОЙКИ',
+        [
+            'text' => 'Языковые строки',
+            'url' => 'admin/langs',
+            'icon' => 'cubes',//'braille',
+            'icon_color' => 'green'
+        ],
+9) папка public для копирования в public/vendors/qwertcms-lang
 
-```
-bin/        
-config/
-src/
-tests/
-vendor/
-```
+## Замечания по реализации
 
+1) Уникальность названий полей в таблице lang_data не отслеживается
+2) Сами ключи языков не хранятся в БД, только в конфиге
+3) Для сохранения моделей и их переводов необходимо к модели подключить trait Translatable, указать атрибут protected $translatable = ['name']; и использовать один из двух методов lcreate($data, $locale=null, $keyField='id') или lsave($locale=null, $keyField='id')
 
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require alooze/
+$ composer require alooze/qwertcms-lang
 ```
-
-## Usage
-
-``` php
-$skeleton = new alooze\QwertCms();
-echo $skeleton->echoPhrase('Hello, League!');
-```
-
-## Change log
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Testing
-
-``` bash
-$ composer test
-```
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
-
-## Security
-
-If you discover any security related issues, please email a.looze@gmail.com instead of using the issue tracker.
+Описание установки и использования будет сделано позднее
 
 ## Credits
 
